@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../lib/sequelize");
+const Review = require("./review");
+const Photo = require("./photo");
 
 const Business = sequelize.define("business", {
   ownerid: { type: DataTypes.INTEGER, allowNull: false },
@@ -14,5 +16,11 @@ const Business = sequelize.define("business", {
   website: { type: DataTypes.STRING, allowNull: true },
   email: { type: DataTypes.STRING, allowNull: true },
 });
+
+Business.hasMany(Review);
+Review.belongsTo(Business);
+
+Business.hasMany(Photo);
+Photo.belongsTo(Business);
 
 module.exports = Business;
